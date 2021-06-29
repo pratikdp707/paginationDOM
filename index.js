@@ -205,13 +205,10 @@ let currentPage = 1;
 let previousPage = 1;
 
 function display(cp) {
-    console.log(cp);
-    console.log((cp - 1) * 6);
-    console.log((cp - 1) * 6 + 6);
     let cardrow = document.getElementById('card-row')
     cardrow.innerHTML = "";
     for (let i = 6 * (cp - 1); i < (6 * (cp - 1)) + 6 && i < data.length; i++) {
-        console.log(data[i].id);
+
         let column = document.createElement('div');
         column.className = 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4';
 
@@ -248,36 +245,30 @@ setActive(1,1);
 
 let pages = document.querySelectorAll('a');
 for (page of pages) {
-    console.log(page.innerText);
     page.addEventListener('click', (event) => {
         let key = event.target.innerText;
 
         if (key == 'Next') {
-            console.log(key);
             if (currentPage == 7)
                 key = 7;
             else
                 key = +currentPage + +1;
-            console.log(key);
             previousPage = currentPage;
             currentPage = key;
             display(currentPage);
             setActive(currentPage, previousPage);
         }
         else if (key == 'Previous') {
-            console.log(key);
             if (currentPage == 1)
                 key = 1;
             else
                 key = +currentPage - +1;
-            console.log(key);
             previousPage = currentPage;
             currentPage = key;
             display(currentPage);
             setActive(currentPage, previousPage);
         }
         else if (key == 'First') {
-            console.log(key);
             key = 1;
             previousPage = currentPage;
             currentPage = key;
@@ -285,7 +276,6 @@ for (page of pages) {
             setActive(currentPage, previousPage);
         }
         else if (key == 'Last') {
-            console.log(key);
             key = 7;
             previousPage = currentPage;
             currentPage = key;
@@ -293,7 +283,6 @@ for (page of pages) {
             setActive(currentPage, previousPage);
         }
         else {
-            console.log(key);
             previousPage = currentPage;
             currentPage = key;
             display(currentPage);
@@ -308,18 +297,20 @@ function setActive(currentPage, previousPage) {
     earlierActivePage.classList.remove('active');
     activepage.classList.add('active');
     if(currentPage == 1){
-        console.log("in disabled");
         document.getElementById('li-previous').classList.add('disabled');
+        document.getElementById('li-first').classList.add('disabled');
     }
     else if(previousPage == 1){
         document.getElementById('li-previous').classList.remove('disabled');
+        document.getElementById('li-first').classList.remove('disabled');
     }
     if(currentPage == 7){
-        console.log("in disabled");
         document.getElementById('li-next').classList.add('disabled');
+        document.getElementById('li-last').classList.add('disabled');
     }
     else if(previousPage == 7){
         document.getElementById('li-next').classList.remove('disabled');
+        document.getElementById('li-last').classList.remove('disabled');
     }
 }
 
